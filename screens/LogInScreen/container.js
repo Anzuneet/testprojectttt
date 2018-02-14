@@ -15,8 +15,6 @@ class Container extends Component {
  
   render() {
     const {toSignUp} = this.state;
-    console.log("maybe, it will be excuted...");
-    console.log(this.state);
     if(toSignUp){
       
       return <SignupNavigation/>;
@@ -39,23 +37,31 @@ class Container extends Component {
     this.setState({password:text});
   };
 
-  _submit = () =>{
+  _submit = async () =>{
     const { username, password, isSubmitting } = this.state;
+    const { login } = this.props;
     if(!isSubmitting){
       if(username  && password){
         this.setState({
           isSubmitting : true
         })
+        const loginResult = await login(username, password);
+        /*if(!loginResult){
+          Alert.alert("Somethin went wrong!,아디혹은비번 틀림");
+          this.setState({isSubmitting : false});
+        }*/
         //submit
       }else{
         Alert.alert('All fields are required!');
       }
     }
   }
+  
   _signup = () =>{
     console.log("Hello I am in _signup!!");
     this.setState({toSignUp:true});
   }
+
 }
 
 const styles = StyleSheet.create({

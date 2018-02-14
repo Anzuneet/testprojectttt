@@ -14,7 +14,8 @@ class Container extends Component {
     fitness_club_name : "", //integer,
     gender : "", // M or F only,
     birthday : "", //date
-    isSubmitting: false
+    isSubmitting: false,
+    isChecked: false,
   }
  
   render() {
