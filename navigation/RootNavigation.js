@@ -1,6 +1,8 @@
 import {StackNavigator} from "react-navigation";
 import TakePhotoScreen from "../screens/TakePhotoScreen";
 import TabsNavigation from "./TabsNavigation";
+import NavButton from "../components/NavButton";
+
 
 const RootNavigation = StackNavigator(
  {
@@ -13,12 +15,14 @@ const RootNavigation = StackNavigator(
     TakePhoto:{
         screen: TakePhotoScreen,
         navigationOpions:{
-            title: "showProfile"
+            title: "showProfile",
+            //headerLeft : props => <NavButton iconName = {"ios-arrow-back"} {...props}  />,
         }
     }
  },
  {
-     mode:"modal"
+     mode:"modal",
+     
  } 
 );
 

@@ -3,7 +3,8 @@ import { AppLoading, Asset, Font} from "expo";
 import { Ionicons, MaterialIcons } from "@expo/vector-icons"
 import { StyleSheet,
          Text,
-         View
+         View,
+         BackHandler,
  } from 'react-native';
 import {Provider} from "react-redux";
 import {PersistGate} from "redux-persist/es/integration/react";
@@ -17,11 +18,13 @@ const {persistor, store} = configureStore();
 
 class App extends React.Component 
 {
+
+
   state ={
     isLoadingComplete : false
   }
   render() {
-    //store.dispatch({type: "LOG_OUT"});
+    store.dispatch({type: "LOG_OUT"});
     const {isLoadingComplete} =this.state;
     if(!isLoadingComplete){
       return(

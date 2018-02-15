@@ -12,7 +12,6 @@ import {
       ActivityIndicator
     } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
-
     
 
 const { width, height } = Dimensions.get("window");
@@ -69,7 +68,7 @@ const LogInScreen = props => (
         </TouchableOpacity>
         <View style={styles.signupTextContent}>
             <Text style = {styles.introSignup}>Don't have a an account yet?</Text>
-            <TouchableOpacity onPressOut={props.signup}>
+            <TouchableOpacity onPressOut={ ()=> props.navigate('SignUp')}>
                 <Text style = {styles.signupText} > SignUP </Text>
             </TouchableOpacity>
         </View>
@@ -84,7 +83,7 @@ LogInScreen.propTypes = {
     changeUsername : PropTypes.func.isRequired,
     changePassword : PropTypes.func.isRequired,
     submit : PropTypes.func.isRequired,
-    signup : PropTypes.func.isRequired
+    navigate : PropTypes.func.isRequired,
 };
 
 const styles = StyleSheet.create({

@@ -14,20 +14,15 @@ class Container extends Component {
   }
  
   render() {
-    const {toSignUp} = this.state;
-    if(toSignUp){
-      
-      return <SignupNavigation/>;
-    }else{
-      return (
-        <LogInScreen {...this.state} 
-        changeUsername = {this._changeUsername}
-        changePassword = {this._changePassword}
-        submit = {this._submit}
-        signup = {this._signup}
-        />
-      );
-    }
+    const {navigate} = this.props.navigation;
+    return (
+      <LogInScreen {...this.state} 
+      changeUsername = {this._changeUsername}
+      changePassword = {this._changePassword}
+      submit = {this._submit}
+      navigate = {navigate}
+      />
+    );
   }
   _changeUsername = (text) =>{
     this.setState({username: text});
@@ -58,7 +53,7 @@ class Container extends Component {
   }
   
   _signup = () =>{
-    console.log("Hello I am in _signup!!");
+
     this.setState({toSignUp:true});
   }
 

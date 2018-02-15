@@ -16,6 +16,8 @@ import {LinearGradient} from 'expo';
 import { Ionicons,Feather } from "@expo/vector-icons";
 import {ModalDropdown} from "react-native-modal-dropdown";
 import RadioForm, {RadioButton, RadioButtonInput, RadioButtonLabel} from 'react-native-simple-radio-button';
+
+
     
 var radio_types = [
   {label: 'trainee', value: "trainee" },
@@ -34,7 +36,6 @@ const SignupScreens = props => (
       style = {styles.container}
       >
       <StatusBar hidden = {true}/>
-      
       <View style={styles.header}>  
         <Image
         source={require("../../assets/images/logo-white.png")}
@@ -61,18 +62,21 @@ const SignupScreens = props => (
             value = {props.password}
             onChangeText={props.changePassword}
             />
-        <TextInput 
-            style = {styles.textInputLoginInformation} 
-            underlineColorAndroid = 'rgba(0,0,0,0)' 
-            placeholder="Confirm Password"
-            secureTextEntry = {true} 
-            value = {props.password2}
-            onChangeText={props.changePassword2}
-            />
-        {props.isChecked ? 
-        <Feather style = {styles.checkPswed} name = "check-circle" size ={30} color = 'green'/> 
-        :
-        <Feather style = {styles.checkPswed} name = "x-circle" size = {30} color = 'red'/>}
+        <View style={styles.paswConfirm}>
+          <TextInput 
+              style = {styles.textInputLoginInformation} 
+              underlineColorAndroid = 'rgba(0,0,0,0)' 
+              placeholder="Confirm Password"
+              secureTextEntry = {true} 
+              value = {props.password2}
+              onChangeText={props.changePassword2}
+              />
+          {props.isChecked ? 
+          <Feather style = {styles.checkPswed} name = "check-circle" size ={30} color = 'green'/> 
+          :
+          <Feather style = {styles.checkPswed} name = "x-circle" size = {30} color = 'red'/>}
+        </View>
+        
       </View>
 
       <Text style={styles.subtitle}> Persnal Information </Text>
@@ -99,12 +103,12 @@ const SignupScreens = props => (
             initial={0}
             formHorizontal={true}
             labelHorizontal={true}
-            buttonColor={'pink'}
+            buttonColor={'#50c900'}
             buttonSize={10}
-            animation={true}
+            animation={false}
             labelStyle = {styles.radioText}
             
-            onPress={props.changeType}
+            onPress={props.changeGender}
           />
           <Text style= {styles.textGender}> Your gender? </Text>
         </View>
@@ -169,6 +173,7 @@ SignupScreens.propTypes = {
     fitness_club_name : PropTypes.string.isRequired,
     gender : PropTypes.oneOf(['M','F']).isRequired,
     birthday : PropTypes.string.isRequired,
+    isChecked: PropTypes.bool.isRequired,
   
     changeUsername : PropTypes.func.isRequired,
     changePassword : PropTypes.func.isRequired,
@@ -179,7 +184,6 @@ SignupScreens.propTypes = {
     changeBirthday : PropTypes.func.isRequired,
     submit : PropTypes.func.isRequired,
     isSearching : PropTypes.func.isRequired,
-
 };
 
 const styles = StyleSheet.create({
@@ -220,6 +224,10 @@ const styles = StyleSheet.create({
       backgroundColor: "#fafafa",
       marginLeft : 20,
 
+    },
+    paswConfirm :{
+      flexDirection : "row",
+      height: 100,
     },
     textInputPhone : {
       width : width-150,
@@ -340,7 +348,8 @@ const styles = StyleSheet.create({
 
    
     checkPswed : {
-      marginLeft : width -60,
+      marginLeft : 15,
+      
     },
     submit : {
       width,
