@@ -92,7 +92,7 @@ const styles = StyleSheet.create({
     },
     header: {
     flex: 1,
-    backgroundColor: "#4E65B4",
+    backgroundColor: "pink",
     alignItems: "center",
     justifyContent: "center",
     width
@@ -134,7 +134,7 @@ const styles = StyleSheet.create({
     },
     touchable:{
         borderRadius:3,
-        backgroundColor:"#3E99EE",
+        backgroundColor:"pink",
         width: width-80
     },
     button:{

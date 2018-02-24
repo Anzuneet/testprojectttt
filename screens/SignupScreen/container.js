@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import { Alert, BackHandler, ToastAndroid} from 'react-native';
 import SignupScreen from "./presenter";
-import LoggedOutNavigation from "../../navigation/LoggedOutNavigation";
 
 class Container extends Component {
 
@@ -91,7 +90,6 @@ componentWillUnmount() {
     this.setState({fitness_club_name:text});
   };
   _changeGender= (text) => {
-    console.log(text);
     this.setState({gender:text});
   };
   _changeBirthday = (text) => {
@@ -102,26 +100,56 @@ componentWillUnmount() {
 
   };
  
-  _submit = () =>{
+  _submit = async () =>{
+    var successSubmit = true;
+    const {navigate} = this.props.navigation;
+    const {signup} = this.props;
     const { username, 
             password,
+            password2,
             phonenumber,
             type,
             fitness_club_name,
             gender,
             birthday,
-            isSubmitting } = this.state;
+            isSubmitting,
+            isChecked,
+          } = this.state;
     if(!isSubmitting){
-      if(username  && password && phonenumber 
+      if(username  && password && password2 && phonenumber 
          && type && fitness_club_name && gender
          && birthday)
          {
-            this.setState({
-            isSubmitting : true
-        })
+            if(!isChecked){
+              Alert.alert('다른 비밀번호');
+              successSubmit = false;
+            }
+
         //submit
       }else{
-        Alert.alert('All fields are required!');
+        Alert.alert('시발시발');
+        successSubmit = false;
+      }
+      if(successSubmit)
+      {
+        this.setState({
+          isSubmitting : true
+        })
+        var personInfo = new Object();
+           
+        personInfo.username = username;
+        personInfo.password = password;
+        personInfo.phonenumber = phonenumber;
+        personInfo.type = type;
+        personInfo.fitness_club_name = fitness_club_name;
+        personInfo.gender = gender;
+        personInfo.birthday = birthday;
+
+        const signupResult = await signup(personInfo);
+        if(!signupResult){
+          this.setState({isSubmitting : false});
+        }
+        navigate('LogIn')
       }
     }
   };

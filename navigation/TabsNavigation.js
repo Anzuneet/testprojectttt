@@ -33,6 +33,7 @@ const TabsNavigation = TabNavigator(
         )
       }
     },
+    /*
     AddPhoto: {
       screen: View,
       navigationOptions: {
@@ -40,7 +41,7 @@ const TabsNavigation = TabNavigator(
           <Ionicons name={"ios-add-circle-outline"} size={30} color={"black"} />
         )
       }
-    },
+    },*/
     Notifications: {
       screen: NotificationsRoute,
       navigationOptions: {
@@ -67,20 +68,22 @@ const TabsNavigation = TabNavigator(
     }
   },
   {
-    tabBarComponent: ({jumpToIndex, ...props, navigation}) => (
+    /*tabBarComponent: ({jumpToIndex, ...props, navigation}) => (
         <TabBarBottom
             {...props}
-            jumpToIndex={index => {
+            /*jumpToIndex={index => {
                 if(index === 2){
-                    navigation.navigate("TakePhoto")
+                    navigation.navigate("searchFilter")
                 } else {
                     jumpToIndex(index)
                 }
             }}
+            
         />
-    ),
+    ),*/
     tabBarPosition: "Top",
     tabBarOptions: {
+      showIcon : true,
       showLabel: false,
       style: {
         backgroundColor: "#FBFBFB",

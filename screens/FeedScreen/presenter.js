@@ -61,6 +61,8 @@ const { width, height } = Dimensions.get("window");
     </View>
     <View style = {styles.graphContainer}>
     </View>
+
+    
     <View style = {styles.bodyPictureContainer}>
     </View>
   </ScrollView>

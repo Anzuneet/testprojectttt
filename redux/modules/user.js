@@ -1,7 +1,8 @@
  // Imports
  
 import { API_URL, FB_APP_ID } from "../../constants";
-import { AsyncStorage } from "react-native";
+import { AsyncStorage, Alert } from "react-native";
+
  
  // Actions
  
@@ -39,33 +40,68 @@ function setNotifications(notifications) {
 
 // API Actions
 function login(username, password) {
+  console.log(username);
+  console.log(password);
   return dispatch => {
-   return fetch(`${API_URL}/rest-auth/login/`, {
-     method: "POST",
+   return fetch(`${API_URL}/token`, {
+     method: "GET",
      headers: {
-       "Content-Type": "application/json"
-     },
-     body: JSON.stringify({
-       username,
-       password
-     })
-   })/*
+       "x-gs-id": username,
+       "x-gs-password" : password
+     }
+   })
      .then(response => response.json())
      .then(json => {
-       if (json.user && json.token) {
+       console.log(json);
+       if (json.token) {
          dispatch(setLogIn(json.token));
-         dispatch(setUser(json.user));
+         return true;
+       } else {
+        Alert.alert(json.msg);
+         return false;
+       }
+     })
+
+ };
+}
+
+function signup(personInfo) {
+  console.log(personInfo);
+  const name = personInfo.username;
+  const password = personInfo.password;
+  const phonenumber = personInfo.phonenumber;
+  const type = personInfo.type;
+  const fitness_club_idx = personInfo.fitness_club_name;
+  const gender = personInfo.gender;
+  const birthday = personInfo.birthday;
+
+  return dispatch => {
+   return fetch(`${API_URL}/users`, {
+     method: "POST",
+     headers : {
+      "Content-Type": "application/json"
+     },
+     body: JSON.stringify({
+
+       name : name,
+       password : password,
+       phonenumber : phonenumber,
+       type : type,
+       fitness_club_idx : fitness_club_idx,
+       gender : gender,
+       birthday : birthday,
+     })
+   })
+     .then(response => response.json())
+     .then(json => {
+       console.log(json);
+       if (json.msg) {
+        Alert.alert(json.msg);
          return true;
        } else {
          return false;
        }
-     });*/
-     .then(temp =>{
-      dispatch(setLogIn("token : jongHui"));
-      dispatch(setUser("user : jonghui"));
-      return true;
-    })
-      return false;
+     })
 
  };
 }
@@ -205,7 +241,8 @@ const actionCreators = {
   login,
   logOut,
   getNotifications,
-  getOwnProfile
+  getOwnProfile,
+  signup
 };
   
 export { actionCreators };

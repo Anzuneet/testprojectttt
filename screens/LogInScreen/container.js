@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import { Alert, StyleSheet} from 'react-native';
 import LogInScreen from "./presenter";
-import SignupNavigation from "../../navigation/SignupNavigation";
 
 
 class Container extends Component {
@@ -41,10 +40,9 @@ class Container extends Component {
           isSubmitting : true
         })
         const loginResult = await login(username, password);
-        /*if(!loginResult){
-          Alert.alert("Somethin went wrong!,아디혹은비번 틀림");
+        if(!loginResult){
           this.setState({isSubmitting : false});
-        }*/
+        }
         //submit
       }else{
         Alert.alert('All fields are required!');

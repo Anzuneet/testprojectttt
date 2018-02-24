@@ -14,7 +14,6 @@ import {
     } from "react-native";
 import {LinearGradient} from 'expo';
 import { Ionicons,Feather } from "@expo/vector-icons";
-import {ModalDropdown} from "react-native-modal-dropdown";
 import RadioForm, {RadioButton, RadioButtonInput, RadioButtonLabel} from 'react-native-simple-radio-button';
 
 
@@ -143,13 +142,14 @@ const SignupScreens = props => (
           />
           <Text style= {styles.textType}> Your choice? </Text>
         </View>
+        
         <View style = {styles.GYMContent}>
           <TextInput 
               style = {styles.textInputGYM} 
               underlineColorAndroid = 'rgba(0,0,0,0)'
-              value = {props.phonenumber}
+              value = {props.fitness_club_name}
               placeholder="If your trainer input GYM" 
-              onChangeText={props.changePhonenumber}
+              onChangeText={props.changeFitness_club_name}
           />
           <TouchableOpacity style = {styles.touchSearch}>
             <Text style = {styles.textSearch}> Search!</Text>
@@ -157,7 +157,7 @@ const SignupScreens = props => (
         </View>
       </View>
       
-      <TouchableOpacity style = {styles.submit}>
+      <TouchableOpacity style = {styles.submit} onPressOut = {props.submit}>
             <Text style = {styles.textSubmit}> submit</Text>
       </TouchableOpacity>
     </ScrollView>

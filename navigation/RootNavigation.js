@@ -1,5 +1,5 @@
 import {StackNavigator} from "react-navigation";
-import TakePhotoScreen from "../screens/TakePhotoScreen";
+import SearchFilterScreen from "../screens/SearchFilterScreen";
 import TabsNavigation from "./TabsNavigation";
 import NavButton from "../components/NavButton";
 
@@ -12,13 +12,12 @@ const RootNavigation = StackNavigator(
             header: null
         }
     },
-    TakePhoto:{
-        screen: TakePhotoScreen,
-        navigationOpions:{
-            title: "showProfile",
-            //headerLeft : props => <NavButton iconName = {"ios-arrow-back"} {...props}  />,
+    searchFilter:{
+        screen : SearchFilterScreen,
+        navigationOptions :{
+            title : "filter"
         }
-    }
+    },
  },
  {
      mode:"modal",
