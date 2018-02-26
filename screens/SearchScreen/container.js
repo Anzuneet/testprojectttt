@@ -1,21 +1,16 @@
 import React, { Component } from "react";
 import {View, Text, StyleSheet} from 'react-native';
 import SearchScreen from "./presenter";
-import {Location, MapView} from 'expo';
+import {Constants, Location, MapView} from 'expo';
 
 class Container extends Component {
-
+  map = null;
   state = {
-    mapRegion:{
-      latitude: 37.2926241,
-      longitude: 145.8544851,
-      latitudeDelta: 0.0922,
-      longitudeDelta: 0.0421,
-      },       
-      markers:{
-          latitude: 37.2926241,
-          longitude: 126.8544851,
-      }
+    mapRegion:'unknown',       
+    markers:{
+        latitude: 37.2926241,
+        longitude: 126.8544851,
+    }
   };
 
   componentDidMount(){
@@ -24,6 +19,7 @@ class Container extends Component {
 
   _getLocationAsync = async () => {
     const location = await Location.getCurrentPositionAsync({});
+
     console.log(location);
     this.setState({
       mapRegion: {
@@ -32,7 +28,9 @@ class Container extends Component {
         latitudeDelta: 0.0922,
         longitudeDelta: 0.0421,
       },
-    });
+    },()=>{
+      
+    });    
   };
 
   _onPress(data){

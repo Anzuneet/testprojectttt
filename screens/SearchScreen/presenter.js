@@ -21,8 +21,10 @@ const SearchScreens = props => (
     <View style = {styles.container}>
         <View style = {styles.mapContainer}>
         <MapView
+            ref={ map => { this.map = map }}
             style={{ alignSelf: 'stretch', height: 500 }}
-            region={props.mapRegion}
+//            region={props.mapRegion}
+            initialRegion = {props.mapRegion}
             onRegionChange={props.handleMapRegionChange}
           >
            <MapView.Marker 

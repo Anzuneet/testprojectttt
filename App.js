@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { AppLoading, Asset, Font} from "expo";
 import { Ionicons, MaterialIcons } from "@expo/vector-icons"
@@ -71,4 +72,3 @@ class App extends React.Component
 
 
 export default App;
-
