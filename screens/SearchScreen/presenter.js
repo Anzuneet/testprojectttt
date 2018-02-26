@@ -13,15 +13,23 @@ import {
       ScrollView,
     } from "react-native";
 import { Ionicons,Feather } from "@expo/vector-icons";
-import RadioForm, {RadioButton, RadioButtonInput, RadioButtonLabel} from 'react-native-simple-radio-button';
-
+import {MapView} from 'expo';
 
 const { width, height } = Dimensions.get("window");
 
 const SearchScreens = props => (
     <View style = {styles.container}>
         <View style = {styles.mapContainer}>
-            <Text> 여기다 지도 띄워 </Text>
+        <MapView
+            style={{ alignSelf: 'stretch', height: 500 }}
+            region={props.mapRegion}
+            onRegionChange={props.handleMapRegionChange}
+          >
+           <MapView.Marker 
+            title={'우리동네 헬스장'}              
+            description={'하하'}              
+            coordinate={props.markers}/>
+        </MapView>
         </View>
         <TouchableOpacity style = {styles.filterContainer} onPressOut = {props.searchFilter}>
             <Text style = {styles.filterText}> 
