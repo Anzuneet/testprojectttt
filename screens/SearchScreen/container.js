@@ -6,16 +6,32 @@ import {Constants, Location, MapView} from 'expo';
 class Container extends Component {
   map = null;
   state = {
-    mapRegion:'unknown',       
-    markers:{
+    mapRegion:null,       
+    markers:
+      [
+      ]
+    ,
+    gyms:[
+      {
+        name:"가라",
+        address:"asd",
+        uid:0,
         latitude: 37.2926241,
-        longitude: 126.8544851,
-    }
+        longitude: 126.8544851}
+    ]
   };
 
   componentDidMount(){
     this._getLocationAsync();
+    this._getGyms();
+    
   };
+  _getGyms = async()=>{
+    let response = await fetch("https://gym.hehehee.net/gyms");
+    let gyms = await response.json();
+    gyms = gyms.result;
+    this.setState({gyms});
+  }
 
   _getLocationAsync = async () => {
     const location = await Location.getCurrentPositionAsync({});
@@ -29,7 +45,18 @@ class Container extends Component {
         longitudeDelta: 0.0421,
       },
     },()=>{
-      
+      let markers = this.state.gyms.filter((gym)=>{
+        let lat = gym.latitude - this.state.mapRegion.latitude;
+        let lon = gym.longitude - this.state.mapRegion.longitude;
+        lat = lat * lat;
+        lon = lon * lon;
+        let latD = this.state.mapRegion.latitudeDelta;
+        let lonD = this.state.mapRegion.longitudeDelta;
+        latD = latD * latD;
+        lonD = lonD * lonD;
+        return (lat < latD) && (lon< lonD) 
+      });
+      this.setState({markers});
     });    
   };
 
@@ -45,6 +72,20 @@ class Container extends Component {
 }
   _handleMapRegionChange = mapRegion => {
     this.setState({ mapRegion });
+    console.log(mapRegion);
+    console.log(this.state.mapRegion);
+    let markers = this.state.gyms.filter((gym)=>{
+      let lat = gym.latitude - mapRegion.latitude;
+      let lon = gym.longitude - mapRegion.longitude;
+      lat = lat * lat;
+      lon = lon * lon;
+      let latD = mapRegion.latitudeDelta;
+      let lonD = mapRegion.longitudeDelta;
+      latD = latD * latD;
+      lonD = lonD * lonD;
+      return (lat < latD) && (lon< lonD) 
+    });
+    this.setState({markers});
   };
 
   /*renderMarkers(){

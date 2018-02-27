@@ -21,21 +21,23 @@ const SearchScreens = props => (
     <View style = {styles.container}>
         <View style = {styles.mapContainer}>
         <MapView
-            ref={ map => { this.map = map }}
             style={{ alignSelf: 'stretch', height: 500 }}
 //            region={props.mapRegion}
             initialRegion = {props.mapRegion}
             onRegionChange={props.handleMapRegionChange}
           >
-           <MapView.Marker 
-            title={'우리동네 헬스장'}              
-            description={'하하'}              
-            coordinate={props.markers}/>
+            {props.markers.map(marker => (
+                <MapView.Marker
+                coordinate={{latitude:marker.latitude,longitude:marker.longitude}}
+                title={marker.name}
+                description={marker.address}
+                />
+            ))}
         </MapView>
         </View>
         <TouchableOpacity style = {styles.filterContainer} onPressOut = {props.searchFilter}>
-            <Text style = {styles.filterText}> 
-                나에게 맞는 트레이너 찾기! 
+            <Text style = {styles.filterText}>
+                {props.markers.length}
             </Text>
         </TouchableOpacity>
     </View>
