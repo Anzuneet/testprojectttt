@@ -10,7 +10,13 @@ import {
   Image,
   Dimensions,
 } from "react-native";
-
+import {
+  VictoryChart,
+  VictoryVoronoiContainer,
+  VictoryTooltip,
+  VictoryLine, 
+}from "victory-native";
+import ProfileChart from "../../components/ProfileChart";
 const { width, height } = Dimensions.get("window");
 
  const FeedScreen = props => (
@@ -57,9 +63,8 @@ const { width, height } = Dimensions.get("window");
           </View>
     </View>
     </View>
-    <View style ={styles.commentsContainer}>
-    </View>
     <View style = {styles.graphContainer}>
+    <ProfileChart/>
     </View>
 
     
@@ -71,24 +76,22 @@ const { width, height } = Dimensions.get("window");
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor : '#ff0066'
+    backgroundColor : 'pink'
   },
   profileContainer : {
     height : 150,
     flexDirection : 'row',
-    backgroundColor : 'white',
+    backgroundColor : '#eeeeee',
     borderColor: "#bbb",
     borderWidth: StyleSheet.hairlineWidth,
-    borderRadius: 20,
-    marginHorizontal : 5,
-    marginVertical : 5,
+    marginBottom : 6,
   },
   commentsContainer : {
     height : 40,
   },
   graphContainer : {
-    height : 700,
-    backgroundColor : 'gray',
+    backgroundColor : 'pink',
+    alignItems : "center",
   }, 
   bodyPictureContainer:{
     height : 1000,

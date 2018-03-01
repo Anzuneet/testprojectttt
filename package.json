@@ -8,10 +8,12 @@
     "react-native": "https://github.com/expo/react-native/archive/sdk-25.0.0.tar.gz",
     "react-native-android-back-button": "^0.3.0",
     "react-native-simple-radio-button": "^2.7.1",
+    "react-native-svg": "^5.5.1",
     "react-navigation": "^1.0.3",
     "react-redux": "^5.0.6",
     "redux": "^3.7.2",
     "redux-persist": "^5.7.0",
-    "redux-thunk": "^2.2.0"
+    "redux-thunk": "^2.2.0",
+    "victory-native": "^0.17.1"
   }
 }
