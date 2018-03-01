@@ -21,7 +21,7 @@ const LogInScreen = props => (
     <StatusBar barStyle={"light-content"} />
     <View style={styles.header}>
         <Image
-        source={require("../../assets/images/logo-white.png")}
+        source={require("../../assets/images/logo-gym.png")}
         resizeMode="stretch"
         style={styles.logo}
         />
@@ -30,7 +30,7 @@ const LogInScreen = props => (
         <TextInput 
             style = {styles.textInput} 
             underlineColorAndroid = 'rgba(0,0,0,0)' 
-            placeholder="Username" 
+            placeholder="PhoneNumber" 
             autoCorrecto = {false}
             value = {props.username}
             onChangeText={props.changeUsername}
@@ -92,7 +92,7 @@ const styles = StyleSheet.create({
     },
     header: {
     flex: 1,
-    backgroundColor: "pink",
+    backgroundColor: "#FFBB00",
     alignItems: "center",
     justifyContent: "center",
     width
@@ -134,7 +134,7 @@ const styles = StyleSheet.create({
     },
     touchable:{
         borderRadius:3,
-        backgroundColor:"pink",
+        backgroundColor:"#FFBB00",
         width: width-80
     },
     button:{
