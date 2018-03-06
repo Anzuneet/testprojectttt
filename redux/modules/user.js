@@ -2,6 +2,7 @@
  
 import { API_URL, FB_APP_ID } from "../../constants";
 import { AsyncStorage, Alert } from "react-native";
+import { getStoredState } from "redux-persist";
 
  
  // Actions
@@ -14,6 +15,8 @@ const SET_NOTIFICATIONS = "SET_NOTIFICATIONS";
  // Action Creators
   
 function setLogIn(token) {
+  // 토큰 값을 tokenKey 변수에 저장한다.
+  tokenKey = token
    return {
      type: LOG_IN,
      token
@@ -160,10 +163,8 @@ function getNotifications() {
 function getOwnProfile() {
   return (dispatch, getState) => {
     const { user: { token, profile: { username } } } = getState();
-    fetch(`${API_URL}/users/${username}/`, {
-      headers: {
-        Authorization: `JWT ${token}`
-      }
+    fetch(`${API_URL}/tokens/${token}/user`, {
+    
     })
       .then(response => {
         if (response.status === 401) {
@@ -176,12 +177,39 @@ function getOwnProfile() {
   };
 }
 
+function getGroups(uid) {
+  //console.log(tokenKey)
+  //console.log(uid);
+  return (dispatch) => {
+   return fetch(`${API_URL}/gyms/${uid}/groups`, { 
+    method: "GET",
+    headers: {
+      "x-gs-token": tokenKey
+    }
+     })
+     .then(response =>response.json() )
+     .then(json=>{
+       console.log(json)
+      if (json.token) {
+         dispatch(setGroupToken(json.token));
+         return true;
+       } else {
+        Alert.alert(json.msg);
+         return false;
+       }
+    })
+ };
+}
+
 // Initial State
   
 const initialState = {
- isLoggedIn: false
+ isLoggedIn: false,
 };
  
+
+tokenKey = '';
+
  // Reducer
  
 function reducer(state = initialState, action) {
@@ -235,6 +263,7 @@ function applySetNotifications(state, action) {
   };
 }
 
+
 // Exports
 
 const actionCreators = {
@@ -242,7 +271,8 @@ const actionCreators = {
   logOut,
   getNotifications,
   getOwnProfile,
-  signup
+  signup,
+  getGroups
 };
   
 export { actionCreators };

@@ -1,6 +1,17 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import { View, Text, StatusBar, StyleSheet } from "react-native";
+import {
+  View,
+  Text,
+  Image,
+  StyleSheet,
+  Dimensions,
+  TouchableOpacity,
+  TextInput,
+  StatusBar,
+  ActivityIndicator,
+  ScrollView,
+} from "react-native";
 import LoggedOutNavigation from "../../navigation/LoggedOutNavigation";
 import RootNavigation from "../../navigation/RootNavigation";
 
@@ -24,7 +35,7 @@ class AppContainer extends Component {
       <View style={styles.container}>
         <StatusBar hidden={true} />
         {isLoggedIn ? 
-          <RootNavigation/> :
+        <RootNavigation/> :
           <LoggedOutNavigation />}
       </View>
     );
@@ -35,7 +46,15 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "#fff"
-  }
+  },
+  topText : {
+    height : 40,
+    backgroundColor :'orange',
+    alignItems : 'center',
+    justifyContent : 'center'
+
+  },
 });
+
 
 export default AppContainer;

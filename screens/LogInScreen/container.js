@@ -43,6 +43,7 @@ class Container extends Component {
         if(!loginResult){
           this.setState({isSubmitting : false});
         }
+        console.log(loginResult)
         //submit
       }else{
         Alert.alert('All fields are required!');
